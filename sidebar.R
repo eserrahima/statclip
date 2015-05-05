@@ -8,9 +8,9 @@
 sidebar <- dashboardSidebar(
   sidebarMenu(
     
-#Data Item    
+#Data Menu   
     menuItem("Data", 
-             tabname="Data",
+             tabName="data",
              icon=icon("table"),
              menuSubItem("Load Data Set",
                          tabName="load",
@@ -21,6 +21,30 @@ sidebar <- dashboardSidebar(
              menuSubItem("Create Simulated Data",
                          tabName="simulate",
                          icon=icon("spinner"))
+             
+             ),
+    
+#Graphs Menu
+    menuItem("Graphs",
+             tabName="graphs",
+             icon=icon("line-chart"),
+             menuSubItem("Histogram",
+                         tabName="histogram"),
+             menuSubItem("Time Series Plot",
+                         tabName="timeseries"),
+             menuSubItem("Dotplot",
+                         tabName="dotplot"),
+             menuSubItem("Pie Chart",
+                         tabName="piechart"),
+             menuSubItem("Bar Chart",
+                         tabName="barchart"),
+             menuSubItem("Scatterplot",
+                         tabName="scatterplot"),
+             menuSubItem("Matrix Plot",
+                         tabName="matrixplot"),
+             menuSubItem("Boxplot",
+                         tabName="boxplot"),
+             
              
              )
     )

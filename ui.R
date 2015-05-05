@@ -13,7 +13,7 @@ dashboardPage(
   
   #HEADER: Title and dropdown menus
   dashboardHeader(
-    title= "Statclip" #Title appearing on the upper left corner of the dashboard
+    title= "StatClip" #Title appearing on the upper left corner of the dashboard
                       #Possibility of adding dropdownmenu outputs
     ),
   
