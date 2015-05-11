@@ -6,6 +6,7 @@
 
 
 sidebar <- dashboardSidebar(
+
   sidebarMenu(
     
 #Data Menu   
@@ -44,8 +45,44 @@ sidebar <- dashboardSidebar(
                          tabName="matrixplot"),
              menuSubItem("Boxplot",
                          tabName="boxplot"),
-             
-             
+             menuSubItem("Bubble Plot",
+                         tabName="bubbleplot"),
+             menuSubItem("Multi-vari Chart",
+                         tabName="multivari"),
+             menuSubItem("Maps",
+                         tabName="maps")
+             ),
+    
+#Comutations Menu    
+    menuItem("Computations",
+             tabName="computations",
+             icon=icon("calculator"),
+             menuSubItem("Basic Operations",
+                         tabName="basicoperations"),
+             menuSubItem("Probabilities",
+                         tabName="probabilities"),
+             menuSubItem("Correlation",
+                         tabName="correlation"),
+             menuSubItem("Descriptive Statistics",
+                         tabName="descriptivestats"),
+             menuSubItem("Goodness of fit",
+                         tabName="goodnessfit")
+             ),
+
+#Statistics Menu
+    menuItem("Statistics",
+             tabName="statistics",
+             icon=icon("bar-chart"),
+             menuSubItem("With Means/Medians",
+                         tabName="means-medians"),
+             menuSubItem("With Variances",
+                         tabName="variances"),
+             menuSubItem("With Proportions",
+                         tabName="proportions"),
+             menuSubItem("Power and Sample Size",
+                         tabName="power-sample-size"),
+             menuSubItem("Regression",
+                         tabName="regression")
              )
-    )
+  )
 )
