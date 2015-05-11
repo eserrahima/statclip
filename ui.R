@@ -1,4 +1,4 @@
-#Statclip
+#StatClip
 #Eduard Serrahima, May 2015
 
 #ui.R

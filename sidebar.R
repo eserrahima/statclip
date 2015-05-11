@@ -1,12 +1,19 @@
-#Statclip
+#StatClip
 #Eduard Serrahima, May 2015
 
 #sidebar.R
 #File defining the sidebar for Statclip
 
+#List of menu items
+list <- c("Load Data Set","Manage Data Set","Create Simulated Data","Histogram","Time Series Plot",
+          "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot","Bubble Plot","Multi-vari Chart",
+          "Basic Operations","Probabilities","Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
+          "With Variances","With Proportions","Power and Sample Size","Regression")
 
 sidebar <- dashboardSidebar(
 
+
+  
   sidebarMenu(
     
 #Data Menu   
@@ -84,5 +91,10 @@ sidebar <- dashboardSidebar(
              menuSubItem("Regression",
                          tabName="regression")
              )
-  )
+  ),
+
+selectizeInput("searchMenuItem", label="Search Item", choices=list,
+               selected=NULL, multiple=FALSE)
+
+
 )
