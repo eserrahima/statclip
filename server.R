@@ -8,12 +8,14 @@ library(shiny)
 library(shinydashboard)
 
 shinyServer(function(input, output) {
+
+########################  
+### LOAD DATASET TAB ###
+########################
   
-### LOAD DATA SET TAB ###
   # If the file to upload is a CSV File, a select input with three options (comma, semicolon, tab) appears
-  
-  output$csv_separator <- renderUI({
-    if(input$filetype==1){
+    output$csv_separator <- renderUI({
+    if(input$filetype==1){ #Where number 1 means Excel File
       return(NULL)
     }
     else{
@@ -24,4 +26,38 @@ shinyServer(function(input, output) {
     }
   })
   
+  # Data table at the lower part of the window.Not editable. Just to visually check 
+  # that the data has been correctly uploaded
+  
+  output$load_dataset_table <- renderTable({
+    
+    inFile <-input$choose_file
+    
+    #Indicates if the first column contains row names
+    if(input$row_numbers){
+      names_column=1
+    }
+    else{
+      names_column=NULL
+    }
+    
+    #Introduces data tables in the user interface
+    if(input$paste&is.null(inFile)){
+      data_table <- read.table("clipboard", header=input$var_names, row.names=names_column)
+      return(data_table)
+      
+    }
+    else if(is.null(inFile)==FALSE&input$filetype==2){
+      data_table <- read.csv(inFile$datapath, header=input$var_names,
+                             sep=input$separator, row.names=names_column)
+      return(data_table)
+      
+    }
+    else{
+      data_table=NULL
+      return(data_table)
+      
+    }
+    
+  })
 })

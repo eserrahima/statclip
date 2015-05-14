@@ -32,7 +32,7 @@ load_data_set <- tabItem (
       status="primary",
       solidHeader=FALSE,
       height=205,
-      p("Select and copy (CTRL+C) the data directly from your Excel, Minitab, or similar, 
+      p("Select and copy (CTRL+C) the data directly from your Excel, Minitab, or similar,
         file and press the button to directly paste it here!"),
       actionButton("paste", label="Paste")
       )
@@ -45,7 +45,7 @@ load_data_set <- tabItem (
       status="primary",
       solidHeader=FALSE,
       width=12,
-      height= 215,
+      height=215,
       # User must indicate if the data table has variable names on the 1st row
       checkboxInput("var_names", label="Check if the data dable has Variable names on top of each column",
                     TRUE),
@@ -54,13 +54,15 @@ load_data_set <- tabItem (
                     FALSE),
       # If CSV File is selected, a three option Select Box appears to choose the character that separates
       # the values in the file
-      uiOutput("csv_separator") #csv_separator is defined in load_data_set_server.R
+      uiOutput("csv_separator") #csv_separator is defined in load_data_set_server.R,
       )
   ),
   
   fluidRow(
     # The third row contains a datatable with the just uploaded data. 
     box(
+      width=12,
+      tableOutput("load_dataset_table")
       )
     )
 )
