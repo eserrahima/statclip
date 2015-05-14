@@ -6,13 +6,61 @@
 
 #The structure of the page will be the following:
 #   Sidebar Menu will be at the left side (as always)
-#   The rest of the screen will be divided in two horizontal parts (constant size)
+#   The rest of the screen will be divided in a data table (below) and a 
+#   top part to define the data upload.
+
+
 
 load_data_set <- tabItem (
   tabName="load",
  
   fluidRow(
-    # Data description: necessary to upload correctly the chosen file.
+    # The first row contains two boxes, either to upload a file or to directly copy-paste data.
+    box(
+      title=strong(h4("File Upload")),
+      status="primary",
+      solidHeader=FALSE,
+      height=205,
+      selectInput("filetype", 
+                  label=strong("File Type"),
+                  choices= list("Excel File (.xls or .xlsx)"=1, "CSV File (.csv or .tsv)"=2)),
+      fileInput("chose_file",
+                label=strong("Choose File"))
+      ),
+    box(
+      title=strong(h4("Data Pasting")),
+      status="primary",
+      solidHeader=FALSE,
+      height=205,
+      p("Select and copy (CTRL+C) the data directly from your Excel, Minitab, or similar, 
+        file and press the button to directly paste it here!"),
+      actionButton("paste", label="Paste")
+      )
+  ),
     
+  fluidRow(
+    # The second row contains the data description, to introduce by the user
+    box(
+      title=strong(h4("Data Description")),
+      status="primary",
+      solidHeader=FALSE,
+      width=12,
+      height= 215,
+      # User must indicate if the data table has variable names on the 1st row
+      checkboxInput("var_names", label="Check if the data dable has Variable names on top of each column",
+                    TRUE),
+      # User must indicate if the data table has row names (or numbers) on the 1st column
+      checkboxInput("row_numbers", label="Check if the data table has row numbers on the first column",
+                    FALSE),
+      # If CSV File is selected, a three option Select Box appears to choose the character that separates
+      # the values in the file
+      uiOutput("csv_separator") #csv_separator is defined in load_data_set_server.R
+      )
+  ),
+  
+  fluidRow(
+    # The third row contains a datatable with the just uploaded data. 
+    box(
+      )
     )
-  )
+)
