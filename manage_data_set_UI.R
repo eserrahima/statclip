@@ -5,7 +5,7 @@
 #File defining the data manage tab
 
 manage_data_set <- tabItem(
-  tabName="manage",
+  tabName="manage"
   
   
   
