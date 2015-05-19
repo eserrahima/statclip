@@ -25,7 +25,7 @@ shinyServer(function (input, output) {
   
   #Reactive Function to upload data from the selected file and create the dataframe
   file_data <- reactive({
-    if (input$clear_data){ #If the "Clear" button is pressed, de dataframe automatically disappears
+    if (input$clear_data){ #If the "Clear" button is pressed, the dataframe automatically disappears
       return(NULL)
     }
     else{
@@ -49,7 +49,7 @@ shinyServer(function (input, output) {
   
   #Reactive Function to create the dataframe from the directly copied data
   clipboard_data <- reactive ({
-    if (input$clear_data){ #If the "Clear" button is pressed, de dataframe automatically disappears
+    if (input$clear_data){ #If the "Clear" button is pressed, the dataframe automatically disappears
       return(NULL)
     }
     else{
