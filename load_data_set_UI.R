@@ -24,8 +24,10 @@ load_data_set <- tabItem (
       selectInput("filetype", 
                   label=strong("File Type"),
                   choices= list("Excel File (.xls or .xlsx)"=1, "CSV File (.csv or .tsv)"=2)),
-      fileInput("chose_file",
-                label=strong("Choose File"))
+      fileInput("choose_file",
+                label=strong("Choose File"),
+                accept=c('text/csv', 'text/comma-separated-values,text/plain',
+                         '.csv'))
       ),
     box(
       title=strong(h4("Data Pasting")),
@@ -44,7 +46,7 @@ load_data_set <- tabItem (
       title=strong(h4("Data Description")),
       status="primary",
       solidHeader=FALSE,
-      width=12,
+      width=8,
       height=215,
       # User must indicate if the data table has variable names on the 1st row
       checkboxInput("var_names", label="Check if the data dable has Variable names on top of each column",
@@ -54,7 +56,37 @@ load_data_set <- tabItem (
                     FALSE),
       # If CSV File is selected, a three option Select Box appears to choose the character that separates
       # the values in the file
-      uiOutput("csv_separator") #csv_separator is defined in load_data_set_server.R,
+      
+      # Conditional Panel: 
+      #   If the introduced file is a CSV file,
+      #   a selectInput appears to les the user select the character separating the data
+      conditionalPanel(
+        condition="input.filetype == 2",
+        selectInput("separator", label="Which character separates the data in your file?",
+                    choices=c(Comma=",", Semicolon= ";", Tab="\t"),
+                    selected=","
+        )),
+      
+      #COnditional Panel:
+      #   If the introduced file is an Excel file (.xlsx),
+      #   a text input box appears to introduce the name of the sheet containing the data
+      conditionalPanel(
+        condition="input.filetype ==1",
+        textInput("sheet_name", label="Which is the name of the sheet containing the data in the Excel file?")
+        )
+      ),
+    
+    
+    box(
+      #Box containing a button to clear the already introuced data
+      title= strong(h4("Clear Data")),
+      status="primary",
+      solidHeader=TRUE,
+      width=4,
+      height=215,
+      p("Just press this button to clear all the data and start again!"),
+      br(),
+      actionButton("clear_data", label="Clear Data")
       )
   ),
   
