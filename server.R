@@ -1,75 +1,63 @@
 #StatClip
 #Eduard Serrahima, May 2015
 
-#server.R - v.19/05/2015
+#server.R
+#File defining the server actions for StatClip
 
 library(shiny)
 library(shinydashboard)
-library(XLConnect)
 
-shinyServer(function (input, output) {
+shinyServer(function(input, output) {
+
+########################  
+### LOAD DATASET TAB ###
+########################
   
-  ########################  
-  ### LOAD DATASET TAB ###
-  ########################
-  
-  #Reactive Function to determine if the dataset contains a column with row names (or numbers)
-  names_column <- reactive ({
-    if(input$row_numbers){
-      return(1)
-    }
-    else{
-      return(NULL)
-    }
-  })
-  
-  #Reactive Function to upload data from the selected file and create the dataframe
-  file_data <- reactive({
-    if (input$clear_data){ #If the "Clear" button is pressed, de dataframe automatically disappears
+  # If the file to upload is a CSV File, a select input with three options (comma, semicolon, tab) appears
+    output$csv_separator <- renderUI({
+    if(input$filetype==1){ #Where number 1 means Excel File
       return(NULL)
     }
     else{
-      inFile <- input$choose_file
-      if (is.null(inFile)){
-        return(NULL)
-      }
-      else {
-        if(input$filetype==1){
-          wb <- loadWorkbook(inFile$datapath)
-          ws <- NULL
-          try((ws <- readWorksheet(wb, sheet=input$sheet_name, header=input$var_names)), silent=TRUE)
-          return(ws)
-        }
-        else{
-          return(read.csv(inFile$datapath, header= input$var_names, sep=input$separator, row.names=names_column()))
-        }
-      }
+      selectInput("separator", label="Which character separates the data in your file?",
+                   choices=c(Comma=",", Semicolon= ";", Tab="\t"),
+                   selected=","
+      )
     }
   })
   
-  #Reactive Function to create the dataframe from the directly copied data
-  clipboard_data <- reactive ({
-    if (input$clear_data){ #If the "Clear" button is pressed, de dataframe automatically disappears
-      return(NULL)
-    }
-    else{
-      data<-NULL
-      try((data <- read.table("clipboard", header= input$var_names, row.names=names_column())), silent=TRUE)
-      return(data)
-    }
-  })
+  # Data table at the lower part of the window.Not editable. Just to visually check 
+  # that the data has been correctly uploaded
   
-  #Output function: load_dataset_table
   output$load_dataset_table <- renderTable({
-    if(is.null(file_data())&!input$paste){
-      data_table <- NULL
-    }
-    else if(!is.null(file_data())&!input$paste){
-      data_table <- file_data()
+    
+    inFile <-input$choose_file
+    
+    #Indicates if the first column contains row names
+    if(input$row_numbers){
+      names_column=1
     }
     else{
-      data_table <- clipboard_data()
+      names_column=NULL
     }
-    return(data_table)
+    
+    #Introduces data tables in the user interface
+    if(input$paste&is.null(inFile)){
+      data_table <- read.table("clipboard", header=input$var_names, row.names=names_column)
+      return(data_table)
+      
+    }
+    else if(is.null(inFile)==FALSE&input$filetype==2){
+      data_table <- read.csv(inFile$datapath, header=input$var_names,
+                             sep=input$separator, row.names=names_column)
+      return(data_table)
+      
+    }
+    else{
+      data_table=NULL
+      return(data_table)
+      
+    }
+    
   })
 })
