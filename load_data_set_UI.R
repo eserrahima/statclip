@@ -24,10 +24,7 @@ load_data_set <- tabItem (
       selectInput("filetype", 
                   label=strong("File Type"),
                   choices= list("Excel File (.xls or .xlsx)"=1, "CSV File (.csv or .tsv)"=2)),
-      fileInput("choose_file",
-                label=strong("Choose File"),
-                accept=c('text/csv', 'text/comma-separated-values,text/plain',
-                         '.csv'))
+      uiOutput("choose_file")
       ),
     box(
       title=strong(h4("Data Pasting")),
@@ -36,7 +33,7 @@ load_data_set <- tabItem (
       height=205,
       p("Select and copy (CTRL+C) the data directly from your Excel, Minitab, or similar,
         file and press the button to directly paste it here!"),
-      actionButton("paste", label="Paste")
+      uiOutput("paste")
       )
   ),
     
