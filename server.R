@@ -13,6 +13,28 @@ shinyServer(function (input, output) {
   ### LOAD DATASET TAB ###
   ########################
   
+  #File Selection Input
+  # Reactive to pressing the "Clear Data Button"
+  # When the user presses the "Clear" button, the input returns to its initial empty state
+  output$choose_file <- renderUI({
+    input$clear_data
+    return(fileInput("choose_file",
+                     label=strong("Choose File")
+                     ))
+  })
+  
+  #Paste Button Input
+  # Reactive to pressing the "Clear Data Button"
+  # When the user presses the "Clear" button, the input returns to its initial empty state
+  output$paste <- renderUI({
+    input$clear_data
+    return(actionButton("paste",
+                     label=("Paste")
+    ))
+  })
+  
+  
+  
   #Reactive Function to determine if the dataset contains a column with row names (or numbers)
   names_column <- reactive ({
     if(input$row_numbers){
@@ -25,38 +47,35 @@ shinyServer(function (input, output) {
   
   #Reactive Function to upload data from the selected file and create the dataframe
   file_data <- reactive({
-    if (input$clear_data){ #If the "Clear" button is pressed, the dataframe automatically disappears
-      return(NULL)
+    input$clear_data
+    inFile <- input$choose_file
+    data <- NULL
+    if (is.null(inFile)){
+      data <- NULL
     }
-    else{
-      inFile <- input$choose_file
-      if (is.null(inFile)){
-        return(NULL)
+    else {
+      if(input$filetype==1){
+        wb <- loadWorkbook(inFile$datapath)
+        ws <- NULL
+        try((ws <- readWorksheet(wb, sheet=input$sheet_name, header=input$var_names)), silent=TRUE)
+        data <- ws
       }
-      else {
-        if(input$filetype==1){
-          wb <- loadWorkbook(inFile$datapath)
-          ws <- NULL
-          try((ws <- readWorksheet(wb, sheet=input$sheet_name, header=input$var_names)), silent=TRUE)
-          return(ws)
-        }
-        else{
-          return(read.csv(inFile$datapath, header= input$var_names, sep=input$separator, row.names=names_column()))
-        }
+      else{
+        data <- read.csv(inFile$datapath, header= input$var_names, sep=input$separator, row.names=names_column())
       }
     }
+    return(data)
+    
   })
   
   #Reactive Function to create the dataframe from the directly copied data
   clipboard_data <- reactive ({
-    if (input$clear_data){ #If the "Clear" button is pressed, the dataframe automatically disappears
-      return(NULL)
-    }
-    else{
-      data<-NULL
+    input$clear_data
+    data <- NULL
+    if(input$paste){
       try((data <- read.table("clipboard", header= input$var_names, row.names=names_column())), silent=TRUE)
-      return(data)
     }
+    return(data)
   })
   
   #Output function: load_dataset_table
@@ -73,3 +92,10 @@ shinyServer(function (input, output) {
     return(data_table)
   })
 })
+
+
+
+  #################################  
+  ### CREATE SIMULATED DATA TAB ###
+  #################################
+
