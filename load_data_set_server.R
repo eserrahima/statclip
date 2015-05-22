@@ -1,15 +1,6 @@
-#StatClip
-#Eduard Serrahima, May 2015
-
-#server.R - v.19/05/2015
-
-library(shiny)
-library(shinydashboard)
-library(XLConnect)
 
 
-shinyServer(function (input, output) {
-  
+load_data_set_server <- function(...){
   ########################  
   ### LOAD DATASET TAB ###
   ########################
@@ -93,18 +84,7 @@ shinyServer(function (input, output) {
     return(data_table)
   })
   
-
-  
-  #################################  
-  ### CREATE SIMULATED DATA TAB ###
-  #################################
-  
-  
-  
-  
-})
+}
 
 
 
-
-  

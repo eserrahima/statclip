@@ -5,7 +5,7 @@
 #File defining the sidebar for Statclip
 
 #List of menu items
-list <- c("Load Data Set","Create Simulated Data","Manage/Edit Data Set","Histogram","Time Series Plot",
+list <- c("Load Data Set","Manage/Edit Data Set","Create Simulated Data","Histogram","Time Series Plot",
           "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot","Bubble Plot","Multi-vari Chart",
           "Basic Operations","Probabilities","Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
           "With Variances","With Proportions","Power and Sample Size","Regression")
@@ -23,12 +23,12 @@ sidebar <- dashboardSidebar(
              menuSubItem("Load Data Set",
                          tabName="load",
                          icon=icon("upload")),
-             menuSubItem("Create Simulated Data",
-                         tabName="simulate",
-                         icon=icon("spinner")),
              menuSubItem("Manage/Edit Data Set",
                          tabName="manage",
-                         icon=icon("pencil-square-o"))
+                         icon=icon("pencil-square-o")),
+             menuSubItem("Create Simulated Data",
+                         tabName="simulate",
+                         icon=icon("spinner"))
                           
              ),
     

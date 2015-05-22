@@ -6,10 +6,8 @@
 
 library(shiny)
 library(shinydashboard)
-source("sidebar.R")
-source("body.R")
-source("load_data_set_UI.R")
-source("manage_data_set_UI.R")
+source("UI-sidebar.R")
+source("UI-body.R")
 
 dashboardPage(
   

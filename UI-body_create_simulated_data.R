@@ -21,35 +21,51 @@ create_simulated_data <- tabItem (
       title=strong(h4("Variables to simulate")),
       status="primary",
       solidHeader=FALSE,
-      height=250,
+      height=400,
       width=4,
       numericInput("num_variables",
                    label=strong("Introduce the number of variables to simulate (max. 10)"),
                    value=1,
-                   max=12,
+                   min=1,
+                   max=10,
                    step=1),
       numericInput("num_rows",
                    label=strong("Introduce the number of rows for the simulated data frame"),
                    value=1,
+                   min=1,
                    step=1)
       ),
     
     tabBox(
       #To introduce the properties of esch variable's simpulation
       # Data can be:
-      #   -Normal
-      #   -Binomial
-      #   -Poisson
+      
+      
       title="Simulation Properties and Conditions",
       id="sim_cond",
       width=8,
+      height=400,
       
-      # 4 variables in each panel (max.). If less variables selected, 
-      tabPanel("Vars. 1-4"
+      # 4 variables in each panel (max.). If less variables selected, no need to fill all the tabs
+      distributions=c(Normal="norm", Binomial= "binom", Poisson="pois",
+                      Exponential="exp")
+      
+      tabPanel("Vars. 1-2",
+               box(
+                 conditionalPanel(
+                   condition="input.num_variables>=1",
+                   selectInput("var1", label="Select data distribution: Var. 1",
+                               choices=distributions))
+                 ),
+               box()
                ),
-      tabPanel("Vars. 5-8"
+      tabPanel("Vars. 3-4"
                ),
-      tabPanel("Vars. 9-12"
+      tabPanel("Vars. 5-6"
+               ),
+      tabPanel("Vars. 7-8"
+               ),
+      tabPanel("Vars. 9-10"
                )
       )
     

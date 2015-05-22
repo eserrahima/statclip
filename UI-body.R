@@ -3,9 +3,9 @@
 
 #body.R
 #File defining the main body for Statclip
-source("load_data_set_UI.R")
-source("create_simulated_data_UI.R")
-source("manage_data_set_UI.R")
+source("UI-body_load_data_set.R")
+source("UI-body_create_simulated_data.R")
+source("UI-body_manage_data_set.R")
 
 body <- dashboardBody(
   
@@ -15,11 +15,11 @@ body <- dashboardBody(
 ### Data Item: ###
 ##################
     # - Load Data Set
-    # - Create Simulated Data
     # - Manage Data Set
+    # - Create Simulated Data
     load_data_set,
-    create_simulated_data,
-    manage_data_set
+    manage_data_set,
+    create_simulated_data
     
   
     )
