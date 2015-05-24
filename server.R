@@ -106,9 +106,9 @@ shinyServer(function (input, output, session) {
   ### CREATE SIMULATED DATA TAB ###
   #################################
   
-  #All the functions are stored at server-create_simulated_data.R and called from server.R
   
-  source("server-create_simulated_data.R", local=TRUE)
+  #All the functions are stored at server-create_simulated_data.R and called from server.R
+  source("Server_files/server-create_simulated_data_varconditions.R", local=TRUE)
   output$conditions_var1 <- conditionsvar1
   output$conditions_var2 <- conditionsvar2
   output$conditions_var3 <- conditionsvar3

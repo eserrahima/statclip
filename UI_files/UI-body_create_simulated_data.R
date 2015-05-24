@@ -211,6 +211,14 @@ create_simulated_data <- tabItem (
                )
       )
     
+    ),
+  
+  fluidRow(
+    box(
+      title="Data table",
+      status="primary",
+      width=12,
+      dataTableOutput("simulated_data_table"))
     )
   
   
