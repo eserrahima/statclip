@@ -8,7 +8,8 @@ library(shinydashboard)
 library(XLConnect)
 
 
-shinyServer(function (input, output) {
+
+shinyServer(function (input, output, session) {
   
   ########################  
   ### LOAD DATASET TAB ###
@@ -93,12 +94,31 @@ shinyServer(function (input, output) {
     return(data_table)
   })
   
+  
+  #################################
+  #### MANAGE/EDIT DATASET TAB ####
+  #################################
+  
+  
 
   
   #################################  
   ### CREATE SIMULATED DATA TAB ###
   #################################
   
+  #All the functions are stored at server-create_simulated_data.R and called from server.R
+  
+  source("server-create_simulated_data.R", local=TRUE)
+  output$conditions_var1 <- conditionsvar1
+  output$conditions_var2 <- conditionsvar2
+  output$conditions_var3 <- conditionsvar3
+  output$conditions_var4 <- conditionsvar4
+  output$conditions_var5 <- conditionsvar5
+  output$conditions_var6 <- conditionsvar6
+  output$conditions_var7 <- conditionsvar7
+  output$conditions_var8 <- conditionsvar8
+  output$conditions_var9 <- conditionsvar9
+  output$conditions_var10 <- conditionsvar10
   
   
   

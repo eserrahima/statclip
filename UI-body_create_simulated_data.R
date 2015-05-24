@@ -12,7 +12,7 @@
 
 #List of distribution available for the simulation
 distributions=c(Normal="norm", Binomial= "binom", Poisson="pois",
-                Exponential="exp")
+                Exponential="exp", Uniform="unif")
 
 
 create_simulated_data <- tabItem (
@@ -26,7 +26,7 @@ create_simulated_data <- tabItem (
       title=strong(h4("Variables to simulate")),
       status="primary",
       solidHeader=FALSE,
-      height=400,
+      height=500,
       width=4,
       numericInput("num_variables",
                    label=strong("Introduce the number of variables to simulate (max. 10)"),
@@ -49,19 +49,21 @@ create_simulated_data <- tabItem (
       title="Simulation Properties and Conditions",
       id="sim_cond",
       width=8,
-      height=400,
+      height=500,
       
       # 4 variables in each panel (max.). If less variables selected, no need to fill all the tabs
       
       tabPanel("Vars. 1-2",
                box(
-                 height=300,
+                 height=425,
                  background="light-blue",
                  conditionalPanel(
                    condition="input.num_variables>=1",
                    selectInput("var1", label="Select data distribution: Var. 1",
                                choices=distributions)
                    ),
+                 br(),
+                 br(),
                  br(),
                  br(),
                  conditionalPanel(
@@ -71,171 +73,139 @@ create_simulated_data <- tabItem (
                    )
                  ),
                box(
-                 height=300,
+                 height=425,
                  conditionalPanel(
                    condition="input.num_variables>=1",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var1")
-                     )
+                   uiOutput("conditions_var1")
                    ),
                  conditionalPanel(
                    condition="input.num_variables>=2",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var2")
-                   )
+                   uiOutput("conditions_var2")
                  )
                  )
                ),
       tabPanel("Vars. 3-4",
                box(
-                 height=300,
+                 height=425,
                  background="light-blue",
                  conditionalPanel(
                    condition="input.num_variables>=3",
-                   selectInput("var1", label="Select data distribution: Var. 3",
+                   selectInput("var3", label="Select data distribution: Var. 3",
                                choices=distributions)
                  ),
                  br(),
                  br(),
+                 br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=4",
-                   selectInput("var2", label="Select data distribution: Var. 4",
+                   selectInput("var4", label="Select data distribution: Var. 4",
                                choices=distributions)
                  )
                ),
                box(
-                 height=300,
+                 height=425,
                  conditionalPanel(
                    condition="input.num_variables>=3",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var3")
-                   )
+                   uiOutput("conditions_var3")
                  ),
                  conditionalPanel(
                    condition="input.num_variables>=4",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var4")
-                   )
+                   uiOutput("conditions_var4")
                  )
                  )
                ),
 
       tabPanel("Vars. 5-6",
                box(
-                 height=300,
+                 height=425,
                  background="light-blue",
                  conditionalPanel(
                    condition="input.num_variables>=5",
-                   selectInput("var1", label="Select data distribution: Var. 5",
+                   selectInput("var5", label="Select data distribution: Var. 5",
                                choices=distributions)
                  ),
                  br(),
                  br(),
+                 br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=6",
-                   selectInput("var2", label="Select data distribution: Var. 6",
+                   selectInput("var6", label="Select data distribution: Var. 6",
                                choices=distributions)
                  )
                ),
                box(
-                 height=300,
+                 height=425,
                  conditionalPanel(
                    condition="input.num_variables>=5",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var5")
-                   )
+                   uiOutput("conditions_var5")
                  ),
                  conditionalPanel(
                    condition="input.num_variables>=6",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var6")
-                   )
+                   uiOutput("conditions_var6")
                  )
                  )
                ),
       tabPanel("Vars. 7-8",
                box(
-                 height=300,
+                 height=425,
                  background="light-blue",
                  conditionalPanel(
                    condition="input.num_variables>=7",
-                   selectInput("var1", label="Select data distribution: Var. 7",
+                   selectInput("var7", label="Select data distribution: Var. 7",
                                choices=distributions)
                  ),
                  br(),
                  br(),
+                 br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=8",
-                   selectInput("var2", label="Select data distribution: Var. 8",
+                   selectInput("var8", label="Select data distribution: Var. 8",
                                choices=distributions)
                  )
                ),
                box(
-                 height=300,
+                 height=425,
                  conditionalPanel(
                    condition="input.num_variables>=7",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var7")
-                   )
+                   uiOutput("conditions_var7")
                  ),
                  conditionalPanel(
                    condition="input.num_variables>=8",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var8")
-                   )
+                   uiOutput("conditions_var8")
                  )
                  )
                ),
       tabPanel("Vars. 9-10",
                box(
-                 height=300,
+                 height=425,
                  background="light-blue",
                  conditionalPanel(
                    condition="input.num_variables>=9",
-                   selectInput("var1", label="Select data distribution: Var. 9",
+                   selectInput("var9", label="Select data distribution: Var. 9",
                                choices=distributions)
                  ),
                  br(),
                  br(),
+                 br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=10",
-                   selectInput("var2", label="Select data distribution: Var. 10",
+                   selectInput("var10", label="Select data distribution: Var. 10",
                                choices=distributions)
                  )
                ),
                box(
-                 height=300,
+                 height=425,
                  conditionalPanel(
                    condition="input.num_variables>=9",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var9")
-                   )
+                   uiOutput("conditions_var9")
                  ),
                  conditionalPanel(
                    condition="input.num_variables>=10",
-                   box(
-                     height=120,
-                     width=12,
-                     uiOutput("conditions_var10")
-                   )
+                   uiOutput("conditions_var10")
                  )
                  )
                )
