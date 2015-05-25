@@ -120,6 +120,10 @@ shinyServer(function (input, output, session) {
   output$conditions_var9 <- conditionsvar9
   output$conditions_var10 <- conditionsvar10
   
+  #The final output data table is called from server-create_simulated_data_datatable.R
+  source("Server_files/server-create_simulated_data_datatable.R",local=TRUE)
+  output$simulated_data_table <- simulated_datatable
+  
   
   
 })

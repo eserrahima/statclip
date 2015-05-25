@@ -2,9 +2,9 @@
 #Eduard Serrahima, May 2015
 
 
-#server-create_simulated_data.R
+#server-create_simulated_data_varconditions.R
 
-#File containing the server functions for the Create Simulated Data tab
+#File containing the server functions for the Create Simulated Data tab,specifically the functions defining the conditions of each simulated variable
 #Needs to be optimized
 
 ############
