@@ -66,6 +66,7 @@ create_simulated_data <- tabItem (
                  br(),
                  br(),
                  br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=2",
                    selectInput("var2", label="Select data distribution: Var. 2",
@@ -93,6 +94,7 @@ create_simulated_data <- tabItem (
                    selectInput("var3", label="Select data distribution: Var. 3",
                                choices=distributions)
                  ),
+                 br(),
                  br(),
                  br(),
                  br(),
@@ -129,6 +131,7 @@ create_simulated_data <- tabItem (
                  br(),
                  br(),
                  br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=6",
                    selectInput("var6", label="Select data distribution: Var. 6",
@@ -160,6 +163,7 @@ create_simulated_data <- tabItem (
                  br(),
                  br(),
                  br(),
+                 br(),
                  conditionalPanel(
                    condition="input.num_variables>=8",
                    selectInput("var8", label="Select data distribution: Var. 8",
@@ -187,6 +191,7 @@ create_simulated_data <- tabItem (
                    selectInput("var9", label="Select data distribution: Var. 9",
                                choices=distributions)
                  ),
+                 br(),
                  br(),
                  br(),
                  br(),
