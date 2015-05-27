@@ -22,7 +22,8 @@ input_vars <- reactive({
            input$var6,input$var7,input$var8,input$var9,input$var10))
 })
 
-#mean, sd, size, prob, lambda, rate, min, max are reactive vectors containing the input names for this characteristics of each simulation
+#mean, sd, size, prob, lambda, rate, min, max are reactive vectors containing the 
+#input names for this characteristics of each simulation
 #They are written to make the programming simpler.
 
 mean <- reactive({
@@ -59,6 +60,10 @@ min <- reactive({
 })
 
 
+#final_list is a reactive function that returns a list containing vectors of each variable's 
+#simulated data.
+#It is constructed using a for loop that gets the values from the reactive vectors defined earlier
+#and stores the simulated values.
 
 final_list <- reactive({
   l <- list()
@@ -83,7 +88,9 @@ final_list <- reactive({
   return(l)
 })
 
-
+#simulated_datatable is the output data table containing the simulation results
+#it renders each time a variable is modified or added
+#in consequence, then, 
 
 simulated_datatable <- renderDataTable({
   vars<-do.call("cbind", final_list())

@@ -1,7 +1,7 @@
 #Statclip
 #Eduard Serrahima, May 2015
 
-#load_data_set_UI.R
+#UI-body_load_data_set.R
 #File defining the data upload tab
 
 #The structure of the page will be the following:
