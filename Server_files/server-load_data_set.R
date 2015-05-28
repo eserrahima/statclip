@@ -39,6 +39,7 @@ names_column <- reactive ({
 #Reactive Function to upload data from the selected file and create the dataframe
 file_data <- reactive({
   inFile <- input$choose_file
+  input$clear_data
   data <- NULL
   if (is.null(inFile)){
     data <- NULL
@@ -71,14 +72,13 @@ clipboard_data <- reactive ({
 
 #Output function: load_dataset_table
 outputtable <- renderTable({
-  if(is.null(file_data())&!input$paste){
-    data_table <- NULL
-  }
-  else if(!is.null(file_data())&!input$paste){
-    data_table <- file_data()
+  input$clear_data
+  data_table <- NULL
+  if(input$paste){
+    data_table <- clipboard_data()
   }
   else{
-    data_table <- clipboard_data()
+    data_table <- file_data()
   }
   return(data_table)
 })  
