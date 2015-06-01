@@ -11,23 +11,36 @@ library(XLConnect)
 
 shinyServer(function (input, output, session) {
   
+  ########################
+  ### SELECT TAB INPUT ###
+  ########################
+  tab_list <- c("Load Data Set","Manage/Edit Data Set","Create Simulated Data","Histogram","Time Series Plot",
+            "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot","Bubble Plot","Multi-vari Chart","Maps",
+            "Basic Operations","Probabilities","Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
+            "With Variances","With Proportions","Power and Sample Size","Regression")
+  tab_id_list <- c("load","manage","simulate","histogram","timeseries","dotplot","piechart","barchart",
+                   "scatterplot","matrixplot","boxplot","bubbleplot","multivari","maps","basicoperations",
+                   "probabilities","correlation","descriptivestats","goodnessfit","means-medians","variances",
+                   "proportions","power-sample-size","regression")
+  
+  
+  #Server code for the SelectizeInput in the sidebar, to select a tab by choosing from the list
+  tab_id <- reactive({
+    idx <- match(input$searchMenuItem, tab_list)
+    return(tab_id_list[idx])
+  })
+  observeEvent(input$searchMenuItem,{
+    updateTabItems(session, "tabs", tab_id())
+  })
+  
   ########################  
   ### LOAD DATASET TAB ###
   ########################
   
   source("Server_files/server-load_data_set.R", local=TRUE)
-  #File Selection Input
-  # Reactive to pressing the "Clear Data Button"
-  # When the user presses the "Clear" button, the input returns to its initial empty state
-  output$choose_file <- choosefile
-  
-  #Paste Button Input
-  # Reactive to pressing the "Clear Data Button"
-  # When the user presses the "Clear" button, the input returns to its initial empty state
-  output$paste <- pastedata
   
   #Output function: load_dataset_table
-  output$load_dataset_table <- outputtable
+  output$load_dataset_table <- datatable
   
   
   #################################

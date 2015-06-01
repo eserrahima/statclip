@@ -2,84 +2,55 @@
 #Eduard Serrahima, May 2015
 
 #server-load_data_set.R
+library(DT)
 
 #Serverfunctions for the Load Data Set tab
 
-#File Selection Input
-# Reactive to pressing the "Clear Data Button"
-# When the user presses the "Clear" button, the input returns to its initial empty state
-choosefile <- renderUI({
-  input$clear_data
-  return(fileInput("choose_file",
-                   label=strong("Choose File")
-  ))
-})
-
-#Paste Button Input
-# Reactive to pressing the "Clear Data Button"
-# When the user presses the "Clear" button, the input returns to its initial empty state
-pastedata <- renderUI({
-  input$clear_data
-  return(actionButton("paste",
-                      label=("Paste")
-  ))
-})
-
-
 #Reactive Function to determine if the dataset contains a column with row names (or numbers)
-names_column <- reactive ({
-  if(input$row_numbers){
-    return(1)
+row_names <- reactive({
+  names <- NULL
+  if(input$row_numbers==TRUE){
+    names <- 1
   }
-  else{
+  return(names)
+})
+
+#clipboard_data is a reactive function that stores the data frame read from the clipboard once
+#"paste" button is pressed
+#Updates its value when row_names or var_names are selected or deselected
+clipboard_data <- reactive({
+  data <- NULL
+  if(input$paste >=1){
+    try(data <- read.table("clipboard", header= input$var_names, row.names=row_names()), silent=TRUE)
+  }
+  return(data)
+})
+
+#sample_data is a reactive function that stores the data frame from the sample data sets once
+#the corresponding button is pressed
+sample_data <- reactive({
+  data <- NULL
+  if(input$iris >=1){
+    try(data <- iris)
+  }
+})
+
+#table_data is a reactive value that contains the data to be displayed
+
+table_data <- reactiveValues(data=NULL)
+observeEvent(input$paste, {
+  table_data$data <- clipboard_data()
+})
+observeEvent(input$iris, {
+  table_data$data <- sample_data()
+})
+
+#Funcion that creates the data table output
+datatable <- DT::renderDataTable({
+  if(is.null(clipboard_data()) & is.null(sample_data())){
     return(NULL)
   }
-})
-
-#Reactive Function to upload data from the selected file and create the dataframe
-file_data <- reactive({
-  inFile <- input$choose_file
-  input$clear_data
-  data <- NULL
-  if (is.null(inFile)){
-    data <- NULL
-  }
-  else {
-    if(input$filetype==1){
-      wb <- loadWorkbook(inFile$datapath)
-      ws <- NULL
-      try((ws <- readWorksheet(wb, sheet=input$sheet_name, header=input$var_names)), silent=TRUE)
-      data <- ws
-    }
-    else{
-      data <- read.csv(inFile$datapath, header= input$var_names, sep=input$separator, row.names=names_column())
-    }
-  }
-  return(data)
-})
-
-
-
-#Reactive Function to create the dataframe from the directly copied data
-clipboard_data <- reactive ({
-  input$clear_data
-  data <- NULL
-  if(input$paste){
-    try((data <- read.table("clipboard", header= input$var_names, row.names=names_column())), silent=TRUE)
-  }
-  return(data)
-})
-
-#Output function: load_dataset_table
-outputtable <- renderTable({
-  input$clear_data
-  data_table <- NULL
-  if(input$paste){
-    data_table <- clipboard_data()
-  }
   else{
-    data_table <- file_data()
+    DT::datatable(table_data$data)
   }
-  return(data_table)
-})  
-
+})
