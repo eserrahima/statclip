@@ -20,6 +20,8 @@ row_names <- reactive({
 #Updates its value when row_names or var_names are selected or deselected
 clipboard_data <- reactive({
   data <- NULL
+  input$row_numbers
+  input$var_names
   if(input$paste >=1){
     try(data <- read.table("clipboard", header= input$var_names, row.names=row_names()), silent=TRUE)
   }
@@ -35,14 +37,14 @@ sample_data <- reactive({
   }
 })
 
-#table_data is a reactive value that contains the data to be displayed
+#table_data is a reactive value that contains which of the data has to be displayed
 
-table_data <- reactiveValues(data=NULL)
+table_data <- reactiveValues(which=NULL)
 observeEvent(input$paste, {
-  table_data$data <- clipboard_data()
+  table_data$which <- "clipboard"
 })
 observeEvent(input$iris, {
-  table_data$data <- sample_data()
+  table_data$which <- "sample"
 })
 
 #Funcion that creates the data table output
@@ -50,7 +52,10 @@ datatable <- DT::renderDataTable({
   if(is.null(clipboard_data()) & is.null(sample_data())){
     return(NULL)
   }
-  else{
-    DT::datatable(table_data$data)
+  else if(table_data$which == "clipboard"){
+    DT::datatable(clipboard_data())
+  }
+  else if(table_data$which == "sample"){
+    DT::datatable(sample_data())
   }
 })
