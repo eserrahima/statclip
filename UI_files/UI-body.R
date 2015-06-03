@@ -1,7 +1,7 @@
 #StatClip
 #Eduard Serrahima, May 2015
 
-#body.R
+#UI-body.R
 #File defining the main body for Statclip
 source("UI_files/UI-body_load_data_set.R")
 source("UI_files/UI-body_create_simulated_data.R")

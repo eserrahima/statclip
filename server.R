@@ -32,7 +32,7 @@ shinyServer(function (input, output, session) {
   
   #Server code for the SelectizeInput in the sidebar, to select a tab by choosing from the list
   tab_id <- reactive({
-    idx <- match(input$searchMenuItem, tab_list)
+    idx <- match(input$searchMenuItem, tab_list)go
     return(tab_id_list[idx])
   })
   observeEvent(input$searchMenuItem,{
