@@ -62,7 +62,11 @@ create_simulated_data <- tabItem (
   fluidRow(
     #the second fluidrow contains the data table showing the results of the simulation
     #it uses, as the load data tab, the DT package to create the table
-    
+    box(
+      title="Simulated Data Table",
+      width=12,
+      DT::dataTableOutput("simulated_data_table")
+      )
     
     )
   )

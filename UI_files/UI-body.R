@@ -15,12 +15,14 @@ body <- dashboardBody(
 ### Data Item: ###
 ##################
     # - Load Data Set
-    # - Manage Data Set
     # - Create Simulated Data
     load_data_set,
-    manage_data_set,
     create_simulated_data
     
+###################
+##### Graphs ######
+###################
+    # - Histogram
   
     )
   )
