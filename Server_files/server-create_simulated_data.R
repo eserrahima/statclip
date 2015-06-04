@@ -124,6 +124,12 @@ simulated_data <- reactive({
   return(data)
 })
 
+s_data <- reactive({
+  vars <- do.call("cbind", simulated_data())
+  final_dataframe <- data.frame(vars)
+  return(final_dataframe)  
+})
+
 simulated_datatable <- DT::renderDataTable({
   vars <- do.call("cbind", simulated_data())
   final_dataframe <- data.frame(vars)

@@ -47,6 +47,20 @@ observeEvent(input$iris, {
   table_data$which <- "sample"
 })
 
+#Loaded data
+loaded_data <- reactive({
+  if(is.null(clipboard_data()) & is.null(sample_data())){
+    return(NULL)
+  }
+  else if(table_data$which == "clipboard"){
+    return(clipboard_data())
+  }
+  else if(table_data$which == "sample"){
+    return(sample_data())
+  }
+  
+})
+
 #Funcion that creates the data table output
 datatable <- DT::renderDataTable({
   if(is.null(clipboard_data()) & is.null(sample_data())){
