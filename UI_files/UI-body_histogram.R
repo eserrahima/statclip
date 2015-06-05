@@ -15,7 +15,7 @@ tab_histogram <- tabItem(
     box(
       title="Plotting Options",
       width=5,
-      height=400,
+      height=700,
       solidHeader=FALSE,
       status="primary",
       
@@ -24,7 +24,13 @@ tab_histogram <- tabItem(
         width=12,
         background="light-blue",
         
-        uiOutput("select_variable_histogram")
+        #MAIN OPTIONS
+        uiOutput("select_variable_histogram"),
+        numericInput("num_intervals_histogram",
+                     label="Introduce the number of intervals in your histogram",
+                     value=5,
+                     min=1,
+                     step=1)
         
       ),
       
@@ -39,8 +45,14 @@ tab_histogram <- tabItem(
     
     #Graph Box
     box(
+      title="Histogram",
+      width=7,
+      height=700,
+      solidHeader=TRUE,
+      status="primary",
       
       #plotOutput
+      plotOutput("histogram_plot")
       
     )
   )

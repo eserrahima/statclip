@@ -6,7 +6,8 @@
 library(shiny)
 library(shinydashboard)
 library(XLConnect)
-
+library(ggplot2)
+library(dplyr)
 
 
 shinyServer(function (input, output, session) {
@@ -91,14 +92,16 @@ shinyServer(function (input, output, session) {
   #################
   
   #We create an input to select the variable for the histogram
-  #It is necessary to create it this way as the datais on the server.R instead of UI.R
+  #It is necessary to create it this way as the data is on the server.R instead of UI.R
   variable_names <- reactive({
     return(names(working_data$data))
   })
-  output$select_variable_histogram <- renderUI({
-    selectInput("var_histogram", label="Choose the variable for the histogram", choices=variable_names())
-  })
   
+  source("Server_files/server-histogram.R", local=TRUE)
+  
+  output$select_variable_histogram <- selectvarhist
+  
+  output$histogram_plot <- histogramplot
   
   
   
