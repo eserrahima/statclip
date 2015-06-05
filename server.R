@@ -101,6 +101,8 @@ shinyServer(function (input, output, session) {
   
   output$select_variable_histogram <- selectvarhist
   
+  output$stratification_variable_histogram <- selectstratvarhist
+  
   output$histogram_plot <- histogramplot
   
   

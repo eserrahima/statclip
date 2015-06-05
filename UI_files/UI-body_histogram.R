@@ -30,14 +30,15 @@ tab_histogram <- tabItem(
                      label="Introduce the number of intervals in your histogram",
                      value=5,
                      min=1,
-                     step=1)
+                     step=1),
+        uiOutput("stratification_variable_histogram")
         
       ),
       
       box(
         title="Appearance Options",
         width=12,
-        background="light-blue"
+        background="aqua"
         
         #APPEARANCE OPTIONS
       )

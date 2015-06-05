@@ -7,6 +7,12 @@ selectvarhist <- renderUI({
   selectInput("var_histogram", label="Choose the variable for the histogram", choices=variable_names())
 })
 
+selectstratvarhist <- renderUI({
+  selectInput("stratification_variable_histogram",
+              label="Choose a stratification variable for the histogram",
+              choices=c("None", variable_names()))
+})
+
 
 histogramplot <- renderPlot({
   try(h <-ggplot(working_data$data, 
