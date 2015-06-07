@@ -26,7 +26,8 @@ graph <- tabItem(
     box(
       title="Plotting Options",
       width=5,
-      solidHeader=TRUE,
+      height= ,
+      solidHeader=FALSE,
       status="primary",
       
       box(
@@ -40,7 +41,7 @@ graph <- tabItem(
       box(
         title="Appearance Options",
         width=12,
-        background="light-blue",
+        background="aqua",
         
         #APPEARANCE OPTIONS
         )
@@ -48,6 +49,11 @@ graph <- tabItem(
     
     #Graph Box
     box(
+      title= ,
+      width=7,
+      height= ,
+      solidHeader=TRUE,
+      status="primary",
       
       plotOutput
       

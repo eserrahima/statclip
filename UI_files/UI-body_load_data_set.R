@@ -44,7 +44,7 @@ load_data_set <- tabItem(
       actionButton("iris", label="Select Iris data set"),
       br(),
       br(),
-      actionButton("cyl", label="Select Cylinder data set")
+      actionButton("mtcars", label="Select Mtcars data set")
     ),
   
   fluidRow(

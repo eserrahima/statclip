@@ -53,7 +53,7 @@ shinyServer(function (input, output, session) {
   
   #Output function: load_dataset_table
   output$load_dataset_table <- datatable
-  
+  #data1() is a reactive function that returns the loaded data
   data1 <- reactive({
     return(loaded_data())
   })
@@ -70,6 +70,7 @@ shinyServer(function (input, output, session) {
   output$distr_conditions <- conditions
   
   output$simulated_data_table <- simulated_datatable
+  #data2() is a reactive function that returns the simulated data
   data2 <-reactive({
     return(s_data())
   })
@@ -77,13 +78,18 @@ shinyServer(function (input, output, session) {
   
   ####################################################
   #Code to select the last updated data set
-  
+  #It assigns the last changed (loaded, pasted, simulated...) to working_data$data
+  #All the items depending on this selection get automatically updated
   working_data <- reactiveValues(data=NULL)
   observeEvent(data1(), {
     working_data$data <- data1()
   })
   observeEvent(data2(),{
     working_data$data <- data2()
+  })
+  
+  variable_names <- reactive({
+    return(names(working_data$data))
   })
   
   
@@ -93,9 +99,6 @@ shinyServer(function (input, output, session) {
   
   #We create an input to select the variable for the histogram
   #It is necessary to create it this way as the data is on the server.R instead of UI.R
-  variable_names <- reactive({
-    return(names(working_data$data))
-  })
   
   source("Server_files/server-histogram.R", local=TRUE)
   
@@ -106,7 +109,22 @@ shinyServer(function (input, output, session) {
   output$histogram_plot <- histogramplot
   
   
+  ###################
+  ### SCATTERPLOT ###
+  ###################
   
+  #We create an input to select the X and Y variables for the scatterplot
+  #It is necessary to create it this way as the data is on the server.R instead of UI.R
+  
+  source("Server_files/server-scatterplot.R", local=TRUE)
+  
+  output$select_x_scatterplot <- selectxscatterplot
+  
+  output$select_y_scatterplot <- selectyscatterplot
+  
+  output$stratification_var_scatterplot <- selectstratvarscatterplot
+  
+  output$scatterplot_plot <- scatterplot
 })
 
 
