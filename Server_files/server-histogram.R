@@ -23,12 +23,14 @@ histogramplot <- renderPlot({
              aes_string(x = colnames(working_data$data)[match(input$var_histogram, variable_names())])),
       silent=TRUE)
   
-  #Creates the histogram geometry.It includes:
+  #Creates the histogram geometry (geom_histogram).It includes:
   #   Binwidth = range/(number of intervals - 1) -> to obtain a histogram with the desired number of intervals
   #   Line color (default = black)
   #   Fill color (default = black)
   #   Opacity (default = 100%)
-  #The title is entered, as well
+  #It also adds:
+  #   Title (ggtitle)
+  #   Title and axis titles' sizes
   try(h2 <- h + geom_histogram(binwidth=(max(working_data$data[match(input$var_histogram, variable_names())]) - 
                                       min(working_data$data[match(input$var_histogram, variable_names())])) /
                             (input$num_intervals_histogram-1),
@@ -48,7 +50,8 @@ histogramplot <- renderPlot({
     h3 <- h2
   }
   
-  #Adds x and y axis' labels (if the user has introduced them)
+  #Adds x and y axis' labels if the user has introduced them
+  #Ifnot, the default are displayed
   if (input$xlab_hist != ""){
     h4 <- h3 + xlab(input$xlab_hist)
   }
@@ -61,7 +64,25 @@ histogramplot <- renderPlot({
   else {
     h5 <- h4
   }
-  h5
-    
+  
+  #If the user has entered a stratification variable, this creates the new plot
+  #strat is a boolean variable: TRUE if the user has chosen a stratification variable
+  try(strat <- input$stratification_var_histogram != "None", silent=TRUE)
+  
+  #facet is the text to introduce to the facet_grid layer. It has this structure: ". ~ var_name"
+  #The structure ". ~ var_name" causes the histograms to be displayed ->hist-hist-hist
+  #The structure "var_name ~ ." causes the histograms to be displayed ->  hist
+  #                                                                       hist
+  #                                                                       hist
+  facet <- paste(". ~", input$stratification_var_histogram)
+  if (strat){
+    #If the user has selected a strat. var. (strat=TRUE)
+    h6 <- h5 + facet_grid(facet)
+  }
+  else{
+    #If strat=FALSE
+    h6 <- h5
+  }
+  h6
 })
 
