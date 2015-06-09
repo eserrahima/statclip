@@ -69,15 +69,17 @@ scatterplot <- renderPlot({
   
   
   #Adds x and y axis' labels if the user has introduced them
-  #Ifnot, the default are displayed
-  if (input$xlab_scat != ""){
-    s4 <- s3 + xlab(input$xlab_scat)
+  #If not, the default are displayed
+  try(xlabel_scat <- input$xlab_scat, silent=TRUE)
+  if (xlabel_scat != ""){
+    s4 <- s3 + xlab(xlabel_scat)
   }
   else{
     s4 <- s3
   }
-  if(input$ylab_scat != ""){
-    s5 <- s4 + ylab(input$ylab_scat)
+  try(ylabel_scat <- input$ylab_scat, silent=TRUE)
+  if(ylabel_scat != ""){
+    s5 <- s4 + ylab(ylabel_scat)
   }
   else {
     s5 <- s4

@@ -125,7 +125,29 @@ shinyServer(function (input, output, session) {
   output$stratification_var_scatterplot <- selectstratvarscatterplot
   
   output$scatterplot_plot <- scatterplot
+  
+  
+  ###################
+  ### BUBBLE PLOT ###
+  ###################
+  
+  #We create an input to select the X and Y variables for the bubble plot
+  #It is necessary to create it this way as the data is on the server.R instead of UI.R
+  
+  source("Server_files/server-bubbleplot.R", local=TRUE)
+  
+  output$select_x_bubbleplot <- selectxbubbleplot
+  
+  output$select_y_bubbleplot <- selectybubbleplot
+  
+  output$size_var_bubbleplot <- selectsizevarbubbleplot
+  
+  output$stratification_var_bubbleplot <- selectstratvarbubbleplot
+  
+  output$bubbleplot_plot <- bubbleplot
+  
 })
+
 
 
 

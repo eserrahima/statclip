@@ -32,7 +32,7 @@ graph <- tabItem(
       
       box(
         title="Main Options",
-        widht=12,
+        width=12,
         background="light-blue",
         
         #INDISPENSABLE OPTIONS

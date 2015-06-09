@@ -7,6 +7,7 @@ source("UI_files/UI-body_load_data_set.R")
 source("UI_files/UI-body_create_simulated_data.R")
 source("UI_files/UI-body_histogram.R")
 source("UI_files/UI-body_scatterplot.R")
+source("UI_files/UI-body_bubbleplot.R")
 
 body <- dashboardBody(
   
@@ -18,8 +19,8 @@ body <- dashboardBody(
 
 
     # - Load Data Set
-    # - Create Simulated Data
     load_data_set,
+    # - Create Simulated Data
     create_simulated_data,
     
 ###################
@@ -29,7 +30,8 @@ body <- dashboardBody(
 
     # - Histogram
     tab_histogram,
-    tab_scatterplot
+    tab_scatterplot,
+    tab_bubbleplot
   
     )
   )
