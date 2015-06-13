@@ -42,6 +42,8 @@ graph <- tabItem(
         title="Appearance Options",
         width=12,
         background="aqua",
+        collapsible=TRUE,
+        collapsed=TRUE,
         
         #APPEARANCE OPTIONS
         )

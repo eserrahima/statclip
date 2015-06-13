@@ -76,7 +76,7 @@ shinyServer(function (input, output, session) {
   })
   
   
-  ####################################################
+  ################################################################################
   #Code to select the last updated data set
   #It assigns the last changed (loaded, pasted, simulated...) to working_data$data
   #All the items depending on this selection get automatically updated
@@ -91,6 +91,7 @@ shinyServer(function (input, output, session) {
   variable_names <- reactive({
     return(names(working_data$data))
   })
+  ################################################################################
   
   
   #################

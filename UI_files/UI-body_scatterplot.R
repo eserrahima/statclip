@@ -4,7 +4,6 @@
 #UI-body_scatterplot.R
 
 #Based on the template UI-body_graphics_template.R
-
 tab_scatterplot <- tabItem( 
   tabName="scatterplot",
   
@@ -37,10 +36,12 @@ tab_scatterplot <- tabItem(
         title="Appearance Options",
         width=12,
         background="aqua",
+        collapsible=TRUE,
+        collapsed=TRUE,
         
         #APPEARANCE OPTIONS
         checkboxInput("scat_jitter",
-                      label="Check to jitter",
+                      label=strong("Check to jitter"),
                       FALSE),
         numericInput("scat_point_size",
                      label="Introduce points' size",
@@ -48,10 +49,9 @@ tab_scatterplot <- tabItem(
         sliderInput("alpha_scat",
                     "Select opacity degree (0 = Transparent / 1 = Opaque)",
                     min=0, max=1, value=1),
-        selectInput("point_color_scat",
-                    label="Choose the fill color of the points (if not stratified)",
-                    choices=colors(),
-                    selected="black"),
+        #Color picker (RLumShiny package)
+        jscolorInput("point_color_scat",
+                     label=strong("Choose the fill color of the points (if not stratified)")),
         textInput("scat_title",
                   label="Enter Plot title",
                   value=""),

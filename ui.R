@@ -6,6 +6,7 @@
 
 library(shiny)
 library(shinydashboard)
+library(RLumShiny)
 source("UI_files/UI-sidebar.R", local=TRUE)
 source("UI_files/UI-body.R", local=TRUE)
 

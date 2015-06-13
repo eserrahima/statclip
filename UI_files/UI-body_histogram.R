@@ -42,20 +42,21 @@ tab_histogram <- tabItem(
         title="Appearance Options",
         width=12,
         background="aqua",
+        collapsible=TRUE,
+        collapsed=TRUE,
         
         #APPEARANCE OPTIONS
         checkboxInput("hist_density",
-                      label="Check to show density on Y axis",
+                      label=strong("Check to show density on Y axis"),
                       FALSE),
-        selectInput("line_color_hist",
-                    label="Choose the color for the exterior line of the bars",
-                    choices=colors(),
-                    selected="black"),
-        selectInput("fill_color_hist",
-                    label="Choose the fill color of the bars",
-                    choices=colors(),
-                    selected="black"
-                    ),
+        #Color picker (RLumShiny package)
+        jscolorInput("line_color_hist",
+                     label=strong("Choose the color for the exterior line of the bars")
+                     ),
+        #Color picker (RLumShiny package)
+        jscolorInput("fill_color_hist",
+                     label=strong("Choose the fill color of the bars")
+                     ),
         sliderInput("alpha_hist",
                     "Select opacity degree (0 = Transparent / 1 = Opaque)",
                     min=0, max=1, value=1

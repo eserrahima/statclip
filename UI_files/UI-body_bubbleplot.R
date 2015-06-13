@@ -15,7 +15,7 @@ tab_bubbleplot <- tabItem(
     box(
       title="Plotting Options",
       width=5,
-      height=1100 ,
+      height=1200 ,
       solidHeader=FALSE,
       status="primary",
       
@@ -39,18 +39,22 @@ tab_bubbleplot <- tabItem(
         title="Appearance Options",
         width=12,
         background="aqua",
+        collapsible=TRUE,
+        collapsed=TRUE,
         
         #APPEARANCE OPTIONS
         checkboxInput("bubble_jitter",
-                      label="Check to jitter",
+                      label=strong("Check to jitter"),
                       FALSE),
+        sliderInput("size_range_bubble",
+                    label="Select bubble size range",
+                    min=1, max=60, value=c(3, 30)),
         sliderInput("alpha_bubble",
                     "Select opacity degree (0 = Transparent / 1 = Opaque)",
                     min=0, max=1, value=1),
-        selectInput("point_color_bubble",
-                    label="Choose the fill color of the points (if not stratified)",
-                    choices=colors(),
-                    selected="black"),
+        #Color picker (RLumShiny package)
+        jscolorInput("point_color_bubble",
+                     label=strong("Choose the fill color of the points (if not stratified)")),
         textInput("bubble_title",
                   label="Enter Plot title",
                   value=""),
@@ -73,7 +77,7 @@ tab_bubbleplot <- tabItem(
     box(
       title= "Bubble plot",
       width=7,
-      height= 1100,
+      height= 1200,
       solidHeader=TRUE,
       status="primary",
       

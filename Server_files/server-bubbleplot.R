@@ -89,7 +89,10 @@ bubbleplot <- renderPlot({
   else {
     b5 <- b4
   }
-  b5
+  
+  b6 <- b5 + scale_size(range=input$size_range_bubble)
+  
+  b6
   
 })
 
