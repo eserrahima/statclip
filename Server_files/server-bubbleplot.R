@@ -92,7 +92,8 @@ bubbleplot <- renderPlot({
   
   b6 <- b5 + scale_size(range=input$size_range_bubble)
   
-  b6
+  #theme_bw() changes background color to white
+  b6 + theme_bw()
   
 })
 

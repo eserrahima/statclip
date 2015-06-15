@@ -84,6 +84,8 @@ scatterplot <- renderPlot({
   else {
     s5 <- s4
   }
-  s5
+  
+  #theme_bw() changes background color to white
+  s5 + theme_bw()
   
 })

@@ -83,6 +83,8 @@ histogramplot <- renderPlot({
     #If strat=FALSE
     h6 <- h5
   }
-  h6
+  
+  #theme_bw() changes background color to white
+  h6 + theme_bw()
 })
 
