@@ -8,6 +8,7 @@ library(shinydashboard)
 library(XLConnect)
 library(ggplot2)
 library(dplyr)
+library(leaflet)
 
 
 shinyServer(function (input, output, session) {
@@ -158,6 +159,8 @@ shinyServer(function (input, output, session) {
   output$select_lat_map <- selectlatmap
   
   output$stratification_var_map <- selectstratvarmap
+  
+  output$map_plot <- map
   
   
 })

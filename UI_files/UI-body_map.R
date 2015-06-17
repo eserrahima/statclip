@@ -44,27 +44,18 @@ tab_map <- tabItem(
         numericInput("map_point_size",
                      label="Introduce points' size",
                      value=3),
+        sliderInput("alpha_map",
+                    "Select opacity degree (0 = Transparent / 1 = Opaque)",
+                    min=0, max=1, value=1),
         #Color picker (RLumShiny package)
-        jscolorInput("point_color_scat",
+        jscolorInput("point_color_map",
                      label=strong("Choose the fill color of the points (if not stratified)")),
-        textInput("scat_title",
+        textInput("map_title",
                   label="Enter Plot title",
                   value=""),
-        numericInput("scat_title_size",
+        numericInput("map_title_size",
                      label="Introduce Plot Title's font size",
-                     value=18),
-        textInput("xlab_scat",
-                  label="Enter X axis label",
-                  value=""),
-        textInput("ylab_scat",
-                  label="Enter Y axis label",
-                  value=""),
-        numericInput("scat_axis_size",
-                     label="Introduce Axis Titles' font size",
-                     value=12)
-        
-        
-        
+                     value=18)
       )
     ),
     
@@ -74,9 +65,9 @@ tab_map <- tabItem(
       width=7,
       height= 1000,
       solidHeader=TRUE,
-      status="primary"
+      status="primary",
       
-      #leafletOutput("map_plot")
+      leafletOutput("map_plot")
       
     )
   )
