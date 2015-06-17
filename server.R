@@ -147,6 +147,19 @@ shinyServer(function (input, output, session) {
   
   output$bubbleplot_plot <- bubbleplot
   
+  ############
+  ### MAPS ###
+  ############
+  
+  source("Server_files/server-map.R", local=TRUE)
+  
+  output$select_long_map <- selectlongmap
+  
+  output$select_lat_map <- selectlatmap
+  
+  output$stratification_var_map <- selectstratvarmap
+  
+  
 })
 
 
