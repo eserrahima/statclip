@@ -23,7 +23,7 @@ clipboard_data <- reactive({
   input$row_numbers
   input$var_names
   if(input$paste >=1){
-    try(data <- read.table("clipboard", header= input$var_names, row.names=row_names()), silent=TRUE)
+    try(data <- read.table("clipboard", sep="\t", header= input$var_names, row.names=row_names()), silent=TRUE)
   }
   return(data)
 })

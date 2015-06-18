@@ -7,6 +7,7 @@
 library(shiny)
 library(shinydashboard)
 library(RLumShiny)
+library(leaflet)
 source("UI_files/UI-sidebar.R", local=TRUE)
 source("UI_files/UI-body.R", local=TRUE)
 
