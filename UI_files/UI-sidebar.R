@@ -6,8 +6,9 @@
 
 #List of menu items
 list <- c("Load Data Set","Create Simulated Data","Histogram","Time Series Plot",
-          "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot","Bubble Plot","Multi-vari Chart","Maps",
-          "Basic Operations","Probabilities","Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
+          "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot",
+          "Bubble Plot","Multi-vari Chart","Maps", "Basic Operations","Probabilities",
+          "Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
           "With Variances","With Proportions","Power and Sample Size","Regression")
 
 sidebar <- dashboardSidebar(
