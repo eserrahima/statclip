@@ -18,21 +18,25 @@ shinyServer(function (input, output, session) {
   ########################
   
   
-  # The following code is used to be able to select the different tabs not only by clicking them (default
-  #option in Shiny Dashboard) but also wrtiting part of their name in the SelectizeInput box located 
+  # The following code is used to be able to select the different tabs 
+  #not only by clicking them (default option in Shiny Dashboard) but 
+  #also wrtiting part of their name in the SelectizeInput box located 
   #at the bottom of the sidebar (under all the tabs)
   
   tab_list <- c("Load Data Set","Create Simulated Data","Histogram","Time Series Plot",
-            "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot","Bubble Plot","Multi-vari Chart","Maps",
-            "Basic Operations","Probabilities","Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
+            "Dotplot","Pie Chart","Bar Chart","Scatterplot","Matrix Plot","Boxplot",
+            "Bubble Plot","Multi-vari Chart","Maps","Basic Operations","Probabilities",
+            "Correlation","Descriptive Statistics","Goodness of fit","With Means/Medians",
             "With Variances","With Proportions","Power and Sample Size","Regression")
   tab_id_list <- c("load","simulate","histogram","timeseries","dotplot","piechart","barchart",
-                   "scatterplot","matrixplot","boxplot","bubbleplot","multivari","maps","basicoperations",
-                   "probabilities","correlation","descriptivestats","goodnessfit","means-medians","variances",
-                   "proportions","power-sample-size","regression")
+                   "scatterplot","matrixplot","boxplot","bubbleplot","multivari","maps",
+                   "basicoperations","probabilities","correlation","descriptivestats",
+                   "goodnessfit","means-medians","variances","proportions","power-sample-size",
+                   "regression")
   
   
-  #Server code for the SelectizeInput in the sidebar, to select a tab by choosing from the list
+  #Server code for the SelectizeInput in the sidebar, 
+  #to select a tab by choosing from the list
   tab_id <- reactive({
     idx <- match(input$searchMenuItem, tab_list)
     return(tab_id_list[idx])
