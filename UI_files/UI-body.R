@@ -9,6 +9,7 @@ source("UI_files/UI-body_histogram.R")
 source("UI_files/UI-body_scatterplot.R")
 source("UI_files/UI-body_bubbleplot.R")
 source("UI_files/UI-body_map.R")
+source("UI_files/UI-body_descriptive_stats.R")
 
 
 body <- dashboardBody(
@@ -32,9 +33,20 @@ body <- dashboardBody(
 
     # - Histogram
     tab_histogram,
+    # - Scatterplot
     tab_scatterplot,
+    # - Bubbleplot
     tab_bubbleplot,
-    tab_map
+    # - Maps
+    tab_map,
+
+####################    
+### Computations ###
+####################
+
+    # - Descriptive Statistics
+    tab_descr_stats
+
   
     )
   )

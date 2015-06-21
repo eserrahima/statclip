@@ -167,6 +167,20 @@ shinyServer(function (input, output, session) {
   output$map_plot <- map
   
   
+###############################################################################3
+
+##############################
+### DESCRIPTIVE STATISTICS ###
+##############################
+
+  source("Server_files/server-descriptive_stats.R", local=TRUE)
+
+  output$select_vars_descr_stats <- vars_descritptive_stats
+
+  output$select_groupingvar_descr_stats <- group_var_descriptive_stats
+
+  
+  
 })
 
 
