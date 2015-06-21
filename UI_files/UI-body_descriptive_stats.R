@@ -42,7 +42,9 @@ tab_descr_stats <- tabItem(
       width=7,
       height=800,
       solidHeader=TRUE,
-      status="primary"
+      status="primary",
+      #Output
+      tableOutput("descriptive_statistics")
       
       )
     

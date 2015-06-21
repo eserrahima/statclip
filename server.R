@@ -179,7 +179,8 @@ shinyServer(function (input, output, session) {
 
   output$select_groupingvar_descr_stats <- group_var_descriptive_stats
 
-  
+  output$descriptive_statistics <- descrip_statistics
+
   
 })
 
