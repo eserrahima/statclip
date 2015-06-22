@@ -181,6 +181,7 @@ shinyServer(function (input, output, session) {
 
   output$descriptive_statistics <- descrip_statistics
 
+
   
 })
 

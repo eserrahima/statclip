@@ -67,7 +67,9 @@ datatable <- DT::renderDataTable({
     return(NULL)
   }
   else if(table_data$which == "clipboard"){
-    DT::datatable(clipboard_data())
+    DT::datatable(clipboard_data(),
+                  options=list(
+                    scrollX=TRUE))
   }
   else if(table_data$which == "sample"){
     DT::datatable(sample_data())

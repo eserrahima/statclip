@@ -46,6 +46,7 @@ tab_descr_stats <- tabItem(
       #Output
       tableOutput("descriptive_statistics")
       
+      
       )
     
     

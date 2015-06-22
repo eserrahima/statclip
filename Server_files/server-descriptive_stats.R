@@ -27,20 +27,46 @@ group_var_descriptive_stats <- renderUI({
 ###############################################################################
 
 #Creates the summary and returns it
-vars <- reactive({
-  v <- NULL
-  try(v <- input$variables_descriptive_statistics, silent=TRUE)
-  return(v)
+
+#df is a reactive function that creates the dataframe with the descriptive statistics results
+df <- reactive({
+  #Numbers of columns of the original data frame to analyze
+  col_numbers <- match(input$variables_descriptive_statistics, variable_names())
+  
+  #If no grouping variable is selected
+  if (input$grouping_variable_descriptive_stats=="None"){
+    col_numbers_total <- col_numbers
+    data <- working_data$data[,col_numbers_total]
+    summary <- describeBy(data, digits=3)
+    df <- data.frame(summary)
+  }
+  
+  #If a grouping variable is selected
+  else{
+    #We get the col number of the grouping variable in the original df
+    group_var_col_number <- match(input$grouping_variable_descriptive_stats, variable_names())
+    #We add it to the col_numbers vector we had created
+    col_numbers_total <- c(col_numbers, group_var_col_number)
+    #We subset the original dataframe
+    data <- working_data$data[,col_numbers_total]
+    #Wecreate the summari dataframe
+    summary <- describeBy(data, 
+                          group=colnames(data)[ncol(data)], 
+                          mat=TRUE, 
+                          digits=3)
+    d <- data.frame(summary)
+    #We eliminate the grouping var of the dataframe
+    df <- subset(d, vars!=length(col_numbers_total))
+    
+  }
+  return(df)
 })
 
 descrip_statistics <- renderTable({
-    col_number <- match(input$variables_descriptive_statistics, variable_names())
-    data <- working_data$data[,col_number]
-    summary <- describeBy(data,digits=3)
-    sum <- data.frame(summary)
-    sum <- subset(sum, select=-c(trimmed, mad, skew, kurtosis))
-    return(sum)
+  table <- df()
+  return(table)
 })
+
 
 
 
