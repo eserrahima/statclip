@@ -30,10 +30,17 @@ clipboard_data <- reactive({
 
 #sample_data is a reactive function that stores the data frame from the sample data sets once
 #the corresponding button is pressed
-sample_data <- reactive({
+sample_data_iris <- reactive({
   data <- NULL
   if(input$iris >=1){
     try(data <- iris)
+  }
+})
+
+sample_data_mtcars <- reactive({
+  data <-NULL
+  if(input$mtcars >= 1){
+    try(data<-mtcars)
   }
 })
 
@@ -44,34 +51,34 @@ observeEvent(input$paste, {
   table_data$which <- "clipboard"
 })
 observeEvent(input$iris, {
-  table_data$which <- "sample"
+  table_data$which <- "sample_iris"
+})
+observeEvent(input$mtcars, {
+  table_data$which <- "sample_mtcars"
 })
 
 #Loaded data
 loaded_data <- reactive({
-  if(is.null(clipboard_data()) & is.null(sample_data())){
+  if(is.null(clipboard_data()) & is.null(sample_data_iris()) & is.null(sample_data_mtcars())){
     return(NULL)
   }
   else if(table_data$which == "clipboard"){
     return(clipboard_data())
   }
-  else if(table_data$which == "sample"){
-    return(sample_data())
+  else if(table_data$which == "sample_iris"){
+    return(sample_data_iris())
   }
-  
+  else if(table_data$which == "sample_mtcars"){
+    return(sample_data_mtcars())
+  }
 })
 
 #Funcion that creates the data table output
 datatable <- DT::renderDataTable({
-  if(is.null(clipboard_data()) & is.null(sample_data())){
+  if (is.null(loaded_data())){
     return(NULL)
   }
-  else if(table_data$which == "clipboard"){
-    DT::datatable(clipboard_data(),
-                  options=list(
-                    scrollX=TRUE))
-  }
-  else if(table_data$which == "sample"){
-    DT::datatable(sample_data())
+  else{
+    DT::datatable(loaded_data())
   }
 })

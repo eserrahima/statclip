@@ -12,8 +12,7 @@ library(psych)
 source("UI_files/UI-sidebar.R", local=TRUE)
 source("UI_files/UI-body.R", local=TRUE)
 
-dashboardPage(
-  
+dashboardPage(  
   #HEADER: Title and dropdown menus
   dashboardHeader(
     title= "StatClip" #Title appearing on the upper left corner of the dashboard
