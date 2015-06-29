@@ -9,6 +9,7 @@ library(XLConnect)
 library(ggplot2)
 library(dplyr)
 library(leaflet)
+library(openintro)
 
 
 shinyServer(function (input, output, session) {
@@ -181,6 +182,39 @@ shinyServer(function (input, output, session) {
 
   output$descriptive_statistics <- descrip_statistics
 
+#####################
+### PROBABILITIES ###
+#####################
+
+  source("Server_files/server-probabilities.R", local=TRUE)
+
+  output$prob_tail <- probabilities_tail
+
+  output$prob_lower_bound <- probabilities_lower_bound
+
+  output$prob_upper_bound <- probabilities_upper_bound
+
+  output$prob_model <- probabilities_model
+
+  output$prob_mean <- probabilities_mean
+
+  output$prob_sd <- probabilities_sd
+
+  output$prob_df1 <- probabilities_df1
+
+  output$prob_df2 <- probabilities_df2
+
+  output$prob_n <- probabilities_n
+
+  output$prob_p <- probabilities_p
+
+  output$prob_a <- probabilities_a
+
+  output$prob_b <- probabilities_b
+
+  output$prob_plot <- probabilities_plot
+
+  output$prob_area <-probabilities_area
 
   
 })

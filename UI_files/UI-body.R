@@ -10,6 +10,7 @@ source("UI_files/UI-body_scatterplot.R")
 source("UI_files/UI-body_bubbleplot.R")
 source("UI_files/UI-body_map.R")
 source("UI_files/UI-body_descriptive_stats.R")
+source("UI_files/UI-body_probabilities.R")
 
 
 body <- dashboardBody(
@@ -45,7 +46,9 @@ body <- dashboardBody(
 ####################
 
     # - Descriptive Statistics
-    tab_descr_stats
+    tab_descr_stats,
+    # - Probabilities
+    tab_probabilities
 
   
     )
