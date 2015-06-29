@@ -62,11 +62,14 @@ df <- reactive({
   return(df)
 })
 
+#Taking the just created dataframe, we select the columns to be displayed, and we change their names
 final_df <- reactive({
+  #If there is no grouping variable selected
   if(input$grouping_variable_descriptive_stats=="None"){
     data <- select(df(), n, mean, sd, median, min,max, range, se)
     colnames(data)<- c("n", "Mean", "Standard Deviation", "Median", "Minimum", "Maximum", "Range", "Standard Error")
   }
+  #If user has selected a grouping variable
   else{
     data <- select(df(), n, group1, mean, sd, median, min,max, range, se)
     colnames(data)<- c("n", "Group", "Mean", "Standard Deviation", "Median", "Minimum", "Maximum", "Range", "Standard Error")
