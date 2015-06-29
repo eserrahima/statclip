@@ -62,8 +62,22 @@ df <- reactive({
   return(df)
 })
 
+final_df <- reactive({
+  if(input$grouping_variable_descriptive_stats=="None"){
+    data <- select(df(), n, mean, sd, median, min,max, range, se)
+    colnames(data)<- c("n", "Mean", "Standard Deviation", "Median", "Minimum", "Maximum", "Range", "Standard Error")
+  }
+  else{
+    data <- select(df(), n, group1, mean, sd, median, min,max, range, se)
+    colnames(data)<- c("n", "Group", "Mean", "Standard Deviation", "Median", "Minimum", "Maximum", "Range", "Standard Error")
+    
+  }
+  return(data)
+})
+
 descrip_statistics <- renderTable({
-  table <- df()
+  table <- NULL
+  try(table <- final_df(), silent=TRUE)
   return(table)
 })
 
