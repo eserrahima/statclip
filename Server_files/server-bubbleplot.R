@@ -5,12 +5,14 @@
 
 #Creates the input to select the X variable for the bubble plot
 selectxbubbleplot <- renderUI({
-  selectInput("x_bubbleplot", label="Choose the X variable for the bubble plot", choices=variable_names())
+  selectInput("x_bubbleplot", label="Choose the X variable for the bubble plot",
+              choices=variable_names())
 })
 
 #Creates the input to select the Y variable for the scatterplot
 selectybubbleplot <- renderUI({
-  selectInput("y_bubbleplot", label="Choose the Y variable for the bubble plot", choices=variable_names())
+  selectInput("y_bubbleplot", label="Choose the Y variable for the bubble plot",
+              choices=variable_names())
 })
 
 #Creates the input to select the size variable for the bubble plot
