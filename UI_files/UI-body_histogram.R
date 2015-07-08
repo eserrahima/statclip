@@ -55,7 +55,8 @@ tab_histogram <- tabItem(
                      ),
         #Color picker (RLumShiny package)
         jscolorInput("fill_color_hist",
-                     label=strong("Choose the fill color of the bars")
+                     label=strong("Choose the fill color of the bars"),
+                     value="#3C8DBC"
                      ),
         sliderInput("alpha_hist",
                     "Select opacity degree (0 = Transparent / 1 = Opaque)",
